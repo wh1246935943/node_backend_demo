@@ -46,6 +46,14 @@ router.post('/login', (req, res) => {
   })
 });
 /**
+ * 退出登录
+ */
+router.post('/logout', () => {
+  pool.getConnection((err, conn) => {
+
+  })
+})
+/**
  * 获取当前用户信息
  */
 router.get('/user', (req, res) => {
