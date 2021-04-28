@@ -6,6 +6,7 @@ const app = express();
 const router = express.Router();
 const stateCode = require('./stateCode.json');
 const cookieParser = require('cookie-parser')
+const constructReturnData = require('./middlewares/index');
 
 const connectMySqlOption = {
   host: 'localhost',
@@ -20,6 +21,7 @@ app.use(bodyParser.json()); // json请求
 app.use(cors())
 app.use(cookieParser());  
 app.use(bodyParser.urlencoded({extended: false})); // 表单请求
+// app.use(constructReturnData)
 
 let pool;
 repool()
@@ -27,7 +29,7 @@ repool()
 /**
  * 构造函数封装返回的结果
  */
-function ConstructReturnData({code = 0, msg = '', data = {}} = {}) {
+function ConstructReturnData({code = 0, data = {}} = {}) {
   this.code = code;
   this.msg = stateCode[code];
   this.data = data;

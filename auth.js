@@ -79,13 +79,15 @@ router.get('/user', (req, res) => {
  * 新增用户
  */
 router.post('/register', (req, res) => {
-  const {name, account, phoneNumber, sex, age, address} = req.body;
+  const {nickName, userName, phoneNumber, userPwd, sex, age, address} = req.body;
+  console.log(nickName, userName, phoneNumber, userPwd, sex, age, address);
   pool.getConnection((err, conn) => {
     conn.query(
       `INSERT INTO userVO SET ?`,
-      {name, account, phoneNumber, sex, age, address},
+      {nickName, userName, phoneNumber, userPwd, sex, age, address},
       (e, r) => {
-        if (r) res.json(new ConstructReturnData({msg: '注册成功，开始记录你的一切吧！'}))
+        console.log(e, r)
+        if (r) res.json(new ConstructReturnData({code: 1005}))
       }
     );
     conn.release();
